@@ -74,8 +74,9 @@ function prepareClassNameForTags(count, params) {
     const normalizedCount = count - params.min;
     const normalizedMax = params.max - params.min;
     const percentage = normalizedCount / normalizedMax;
-    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
-    return  classNumber;
+    let className = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+    className = optCloudClassPrefix + className;
+    return  className;
 }
 
 function generateTags(){
@@ -90,7 +91,7 @@ function generateTags(){
             const tagLinkHTMLData = {tagId: tag};
             const tagLinkHTML = templates.tagLink(tagLinkHTMLData);
             html = html + tagLinkHTML;
-            if(!allTags.hasOwnProperty(tag)) {
+            if (!allTags.hasOwnProperty(tag)) {
                 allTags[tag] = 1;
             } else {
                 allTags[tag]++;
@@ -105,10 +106,9 @@ function generateTags(){
         allTagsData.tags.push({
             tag: tag,
             count: allTags[tag],
-            className: optCloudClassPrefix + prepareClassNameForTags(allTags[tag], tagsParams)
+            className: prepareClassNameForTags(allTags[tag], tagsParams)
         });
     }
-    console.log(allTagsData)
     tagList.innerHTML = templates.tagCloudLink(allTagsData);
 }
 
@@ -154,7 +154,7 @@ function generateAuthors(){
             const authorLinkHTMLData = {authorId: articleAuthor};
             const authorLinkHTML = templates.authorLink(authorLinkHTMLData);
             html = html + authorLinkHTML;
-            if(!allAuthor.hasOwnProperty(author)) {
+            if (!allAuthor.hasOwnProperty(author)) {
                 allAuthor[author] = 1;
             } else {
                 allAuthor[author]++;
