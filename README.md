@@ -1,1 +1,1 @@
-https://maciej-krzyzowski.github.io/JS-blog/
+DEMO: https://maciej-krzyzowski.github.io/project-blog/
